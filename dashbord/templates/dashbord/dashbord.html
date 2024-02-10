@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+{% load blog_tags %}
+{% block title %}My posts{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center mt-5 mb-3"><a href="{{ post.get_absolute_url_2 }}" class="btn btn-primary">Add New Annonce</a></h1>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-lg-4">
+            <div class="card shadow">
+                {% if post.picture %}
+                <img src="{{ post.picture.url }}" class="img-fluid rounded-start" alt="{{ post.title }}">
+                {% else %}
+                <img src="{% static 'placeholder.jpg' %}" class="img-fluid rounded-start" alt="Placeholder">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
+                    <p class="card-text"><small class="text-body-secondary">Published {{ post.publish }} by {{ post.author }}</small></p>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Update</a>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include "pagination.html" with page=page_obj %}
+{% endblock %}

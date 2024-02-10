@@ -1,0 +1,25 @@
+{% extends "blog/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+  {% if error_message %}
+    <div class="alert alert-danger" role="alert">
+      {{ error_message }}
+    </div>
+  {% endif %}
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

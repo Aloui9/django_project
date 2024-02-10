@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container mb-3 mt-5">
+  <div class="row justify-content-center">
+      <div class="col-6">
+        <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{{ post.picture.url }}" class="d-block w-100" alt="...">
+            </div>
+            <!-- Add more carousel items here if needed -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="container mb-3 mt-5">
+  <div class="row justify-content-center">
+      <div class="col-10">
+        <div class="card text-center">
+          <div class="card-header">
+            {{ post.title }}
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ post.body|linebreaks }}</p>
+            <ul class="list-group">
+              {% for comment in comments %}
+              <li class="list-group-item"> Comment {{ forloop.counter }} by {{ comment.name }}
+                {{ comment.created }}  {{ comment.body|linebreaks }}</li>
+              {% endfor %}
+              {% include "blog/post/includes/comment_form.html" %}
+            </ul>
+          </div>
+          <div class="card-footer text-body-secondary">
+            <!-- Add footer content here if needed -->
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
